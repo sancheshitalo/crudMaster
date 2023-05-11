@@ -1,0 +1,38 @@
+version: '3.7'
+
+networks:
+  estudoNode:
+    external: true
+    name: 'estudoNode'
+
+services:
+  app:
+    container_name: ESTUDO_NODE
+    build:
+      context: .
+    restart: always
+    volumes:
+      - ./src:/home/node/app/src
+    environment:
+      - NODE_ENV=development
+      - APP_PORT=3000
+    ports:
+      - '3000:3000'
+    # depends_on: 
+    #   - database
+  
+  # database:
+  #   container_name: estudo-node.vm-database
+  #   build:
+  #     context: mysql
+  #   restart: always
+  #   command: --skip-partition --max_allowed_packet=32505856 --character-set-server=utf8mb4 --innodb_file_format=barracuda --innodb_large_prefix=1 --collation-server=utf8mb4_general_ci
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+  #     - MYSQL_DATABASE=core
+  #   volumes:
+  #     - './mysql_data:/var/lib/mysql'
+  #   ports:
+  #     - 63309:3306
+  #   networks:
+  #     - estudoNode

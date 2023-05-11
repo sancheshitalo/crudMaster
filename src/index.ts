@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     const dadosAdicionais = {
         city: 'maringá'
     }
-    resp.status(201).send({
+    res.status(201).send({
         ...clienteSalvo,
         ...dadosAdicionais
     })
@@ -35,6 +35,20 @@ app.get('/buscar-clientes', (req, resp) => {
     const clienteEncontrado = clientes.filter((client) => client.name === params.name)
 
     resp.json(clienteEncontrado)
+})
+
+app.get('/clientes-cadastrados', (req, res) => {
+    const clientesCadastrados = [
+        { name: 'weslei' },
+        { name: 'hitalo' },
+        { name: 'bigode' },
+        { name: 'rogerio' },
+        { name: 'baldman' },
+        { name: 'arion' },
+    ]
+
+    res.json(clientesCadastrados);
+
 })
 
 app.post('/cadastrar-cliente', (req, resp) => {
